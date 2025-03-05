@@ -59,7 +59,7 @@ const Login = () => {
       }
 
     } catch (error) {
-      setErrorMessage('Erreur lors de la connexion, veuillez réessayer');
+      setErrorMessage('Email et/ou mot de passe incorrect');
       console.log(`Erreur lors de la connexion: ${error}`);
     } finally {
       setLoading(false);

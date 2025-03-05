@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import { USER_INFO } from "../constants/appConstant";
 
 // On définit notre contexte d'authentification
 const AuthContext = createContext({
@@ -26,7 +27,7 @@ const AuthContextProvider = ({ children }) => {
             setEmail(user.email);
             setNickname(user.nickname);
             // On enregistre les données de l'utilisateur dans le localStorage
-            localStorage.setItem('USER_INFO', JSON.stringify(user));
+            localStorage.setItem(USER_INFO, JSON.stringify(user));
         } catch (error) {
             throw new Error(`Erreur lors de la connexion : ${error}`);
         }
