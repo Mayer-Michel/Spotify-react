@@ -7,6 +7,8 @@ import useAuthCheck from '../../hooks/useAuthCheck';
 import { USER_INFO } from '../../constants/appConstant';
 import PageLoader from '../../components/Loader/PageLoader';
 import OfferCard from '../../components/Card/OfferCard';
+import axios from 'axios';
+import { API_ROOT } from '../../constants/apiConstant';
 
 function Subscription() {
   const dispatch = useDispatch();
@@ -31,7 +33,24 @@ function Subscription() {
   const dataPlans = plans['hydra:member'];
   // Méthode qui récupère le choix de l'abonnement
   const handleSubscription = async (stripePriceId) => {
-    console.log(stripePriceId)
+    try {
+      // On récuperer l'email de l'utilisateur en localstorage
+      const email = userInfo.email
+      setIsLoading(true);
+
+      const response = await axios.post(`${API_ROOT}/create-checkout-session`, { email, stripePriceId });
+      const data = response.data;
+
+      if (data.checkoutUrl) {
+        window.location.href =data.checkoutUrl; // redirection vers la page de paiement de stripe
+      } else {
+        console.log(`erreur stripe: ${data.error}`);
+      }
+    } catch (error) {
+      console.log(`erreur lors de la création de la session de paiement: ${error}`);
+    }finally{
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -47,7 +66,7 @@ function Subscription() {
             <OfferCard
               key={plan?.id}
               plan={plan}
-              onSubscribe={()=> handleSubscription(plan.stripePriceId)}
+              onSubscribe={() => handleSubscription(plan.stripePriceId)}
               isLoading={isLoading}
             />
           ))}

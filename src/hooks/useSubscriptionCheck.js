@@ -13,6 +13,7 @@ const useSubscriptionCheck = (userInfo) => {
             } else if (userInfo && userInfo?.email) {
                 const subscriptionValid = await checkSubscription(userInfo.email);
                 setIsSubscribed(subscriptionValid)
+
             } else {
                 setIsSubscribed(false);
             }

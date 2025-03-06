@@ -25,10 +25,10 @@ const Login = () => {
 
   useEffect(() => {
     if (user && !checkingSubscription) {
-      if (isSubscribed) {
-        navigate('/');
+      if (!isSubscribed) {
+        navigate('/subscription');
       } else {
-        navigate('/subscription')
+        navigate('/')
       }
     }
   }, [user, isSubscribed, checkingSubscription, navigate])

@@ -1,42 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react'
+import { Outlet } from 'react-router-dom'
+import { USER_INFO } from './constants/appConstant'
+import useAuthCheck from './hooks/useAuthCheck';
+import Sidebar from './components/Ui/Sidebar';
 
 const App = () => {
-  // const user ={
-  //   'lastname': 'Doe',
-  //   'firstname': 'John',
-  //   'age': 24
-  // }
-
-  useEffect(() => {
-    // comportement lors du montage du composant
-    setFirstname('Tata');
-    return () => {
-      // comportement lors du démontage du composant
-    }
-  }, []);
-
-
-  const [firstname,setFirstname] = useState('Toto');
-  const [isActive,setIsActive] = useState(false);
-  console.log('Hello world !');
-  const handleFirstname = () => {
-    const name = firstname == 'Tata' ? 'John' : 'Julien';
-    setFirstname(name);
-  };
-
-  const toggleState = () => {
-    setIsActive(!isActive);
-  }
-
-  const state = isActive ? "Est actif" : "N'est pas actif";
+  // On récupère les infos de l'user dans le localstorage
+  const user = JSON.parse(localStorage.getItem(USER_INFO));
+  // On vérifie que l'utilisateur en session est bien le bon
+  useAuthCheck(user);
   return (
-    // <Test name={user} title={"Hello World"}/>
-    <div>
-      <p className="cursor-pointer" onClick={()=>{handleFirstname()}}>{ firstname }</p>
-      <p className={`${isActive ? 'text-green-500 border-green-500' : 'text-red-500 border-red-500' } p-2 border`}>{state}</p>
-      <button className='bg-gray-200 px-3 py-2 rounded-lg hover:ng-gray-500 cursor-pointer' onClick={()=>{toggleState()}}>Changer l'état</button>
+    <div className='relative flex'>
+      <Sidebar />
+     <div className='flex-1 flex flex-col bg-gardient-to-b from-black to-[rgb(18,18,18)]'>
+      {/* TODO: appeler la Topbar */}
+      <div className='h-[calc(100vh-64px)] overflow-y-scroll hide-scrollbar flex xl:flex-row flex-col-reverse'>
+        <div className='flex-1 h-fit pb-40 text-white'>
+          <Outlet />
+        </div>
+      </div>
+     </div>
+     {/* TODO: afficher le player */}
     </div>
-  );
+  )
 }
 
 export default App
