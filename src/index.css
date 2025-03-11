@@ -33,3 +33,32 @@
 .title-h1{
     @apply text-white text-3xl font-bold mb-6;
 }
+
+.link-sidebar{
+    @apply w-full flex p-3 items-center justify-start font-medium text-sm text-white hover:bg-green hover:text-white transition duration-500;
+}
+/* active sidebar */
+.active, .active svg{
+    @apply text-green text-base ms-1;
+}
+  
+.active:hover, .active:hover svg{
+    @apply text-white duration-500;
+}
+
+/* barre de scroll */
+::-webkit-scrollbar{
+    width:10px;
+    background-color: transparent;
+}
+  
+::-webkit-scrollbar-thumb {
+    @apply bg-green_top;
+    border-radius: 5px;
+}
+
+/* collapse transition */
+.ReactCollapse--collapse{
+    transition: height 1000ms;
+}
+

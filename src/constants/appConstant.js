@@ -1,6 +1,6 @@
 import { AiOutlineAppstoreAdd, AiOutlineHome, AiOutlineSearch } from "react-icons/ai";
 import { IMAGE_URL } from "./apiConstant";
-import { BiLibrary } from "react-icons/bi";
+import { BiHeart, BiLibrary } from "react-icons/bi";
 import { MdFavoriteBorder } from "react-icons/md";
 import { FiSettings } from "react-icons/fi";
 

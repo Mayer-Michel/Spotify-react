@@ -41,8 +41,6 @@ const Login = () => {
 
     try {
       const response = await axios.post(`${API_ROOT}/login`, { email, password });
-      console.log(response.data);
-
 
 
       if (response.data.success === false) {

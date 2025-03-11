@@ -12,7 +12,6 @@ function PaymentSuccess() {
   const [subscriptionId, setSubscriptionId] = useState('');
   const [isLoading, setIsLoading] = useState('');
   const navigate = useNavigate();
-  console.log(subscriptionId);
 
 
   const userId = JSON.parse(localStorage.getItem(USER_INFO))?.userId;
