@@ -3,6 +3,7 @@ import planReducer from './plans/planSlice';
 import albumReducer from './album/albumSlice';
 import playerReducer from './player/playerSlice';
 import userReducer from './user/userSlice';
+import artistReducer from './artist/artistSlice';
 
 
 const store = configureStore({
@@ -12,6 +13,7 @@ const store = configureStore({
         albums: albumReducer,
         player: playerReducer,
         users: userReducer,
+        artists: artistReducer,
     }
 });
 

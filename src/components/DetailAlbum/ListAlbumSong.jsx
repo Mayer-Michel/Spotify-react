@@ -81,6 +81,7 @@ const ListAlbumSong = ({ dataAlbum }) => {
                                                 isPlaying={isPlaying}
                                                 activeSong={activeSong}
                                                 index={index}
+                                                data={data}
                                                 />
                                                 }
                                             </td>

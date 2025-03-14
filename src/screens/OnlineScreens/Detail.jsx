@@ -21,8 +21,6 @@ const Detail = () => {
   }, [id])
 
   const {loading, albumDetail} = useSelector(selectAlbumData);
-
-  console.log(albumDetail);
   
   return (
     loading ? <PageLoader /> :

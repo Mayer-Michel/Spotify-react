@@ -28,7 +28,6 @@ const ToolbarDetail = ({ dataAlbum }) => {
     const [isCollapsed, setIsCollapsed] = useState(false); // pour ouvrir ou fermer la collapse
     const [isInList, setIsInList] = useState(false); // pour savoir si l'album est dans la liste des favoris
     const [listArray, setListArray] = useState([]); // tableau d'uri des albums favoris (au format '/api/albums/id')
-    console.log('isInList', isInList);
 
     //on récupère les hook
     const dispatch = useDispatch();
@@ -55,7 +54,6 @@ const ToolbarDetail = ({ dataAlbum }) => {
 
             // on récupère les id des albums favoris reconstruit en uri 
             const idArray = userFavorites.map((item) => `/api/albums/${item.id}`);
-            console.log('idArray', idArray);
 
             //on set la liste dans notre state en supprimant les doublons
             setListArray([...new Set(idArray)]);

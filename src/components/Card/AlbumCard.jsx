@@ -6,14 +6,14 @@ import { playPause, setActiveAlbum, setActiveSong } from '../../store/player/pla
 import PlayPause from '../Services/PlayPause';
 
 
-const AlbumCard = ({ data, index, songs, isPlaying, activeSong }) => {
+const AlbumCard = ({ data, index, songs, isPlaying, activeSong, artist= 'inconnu' }) => {
 
   // On récupère le hook dispatch pour des actions de react-redux
   const dispatch = useDispatch();
   //on récupère l'image de l'album
   const imgAlbum = `${ALBUM_URL}/${data?.imagePath}`;
   //on redefinit des const pour les infos de l'album
-  const artistName = data?.artist?.name ?? 'Artiste inconnu';
+  const artistName = data?.artist?.name ?? artist;
   const albumName = data?.title ?? 'Album inconnu';
   const albumId = data?.id ?? 0;
   
