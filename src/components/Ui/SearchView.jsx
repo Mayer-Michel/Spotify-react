@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import selectAlbumData from '../../store/album/AlbumSelector';
 import AlbumCard from '../Card/AlbumCard';
 import ArtistCard from '../Card/ArtistCard';
 
-const SearchView = () => {
+const SearchView = ({word}) => {
 
+    const [searchWord, stateSearchWord] = useState(word)
     // on récupère les infos du slice album
     const { searchAlbum, searchTitle, searchArtist } = useSelector(selectAlbumData);
     // on récupère les infos du slice player
@@ -21,11 +22,11 @@ const SearchView = () => {
             {dataAlbum && dataAlbum.length === 0 
             && dataTitle && dataTitle.length === 0
             && dataArtist && dataArtist.length === 0 &&
-                (<h2 className='font-bold text-3xl text-white text-left mt-10 mb-4'>Aucun Résultat trouvé</h2>)}
+                (<h2 className='font-bold text-3xl text-white text-left mt-10 mb-4'>{`Aucun Résultat trouvé pour : ${searchWord}`}</h2>)}
 
             {/* partie album */}
             {dataAlbum && dataAlbum.length > 0
-                ? <h2 className='font-bold text-3xl text-white text-left mt-10 mb-4'>Résultats des albums</h2>
+                ? <h2 className='font-bold text-3xl text-white text-left mt-10 mb-4'>{`${dataAlbum.length} albums(s) trouvés(s) pour le mot: ${searchWord}`}</h2>
                 : null}
             <div className='flex flex-wrap'>
                 {dataAlbum && dataAlbum.map((data, index) => (
@@ -42,7 +43,7 @@ const SearchView = () => {
             </div>
             {/* partie title */}
             {dataTitle && dataTitle.length > 0
-                ? <h2 className='font-bold text-3xl text-white text-left mt-10 mb-4'>Résultats des titres de chansons</h2>
+                ? <h2 className='font-bold text-3xl text-white text-left mt-10 mb-4'>{`${dataTitle.length} titre(s) de chanson trouvés(s) pour le mot: ${searchWord}`}</h2>
                 : null}
             <div className='flex flex-wrap'>
                 {dataTitle && dataTitle.map((data, index) => (
@@ -59,7 +60,7 @@ const SearchView = () => {
             </div>
             {/* partie artist */}
             {dataArtist && dataArtist.length > 0
-                ? <h2 className='font-bold text-3xl text-white text-left mt-10 mb-4'>Résultat(s) des artistes</h2>
+                ? <h2 className='font-bold text-3xl text-white text-left mt-10 mb-4'>{`${dataArtist.length} artiste(s) trouvés(s) pour le mot: ${searchWord}`}</h2>
                 : null}
             <div className='flex flex-wrap'>
                 {dataArtist && dataArtist.map((data, index) => (
