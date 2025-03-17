@@ -28,7 +28,7 @@ const userSlice = createSlice({
 
 export const { setLoading,setUserDetail, setUserFavorites, setAvatars } = userSlice.actions;
 
-//méthode qui récupère les info d'un user
+// méthode qui récupère les info d'un user
 export const fetchUserDetail = (id) => async (dispatch) => {
   try {
     dispatch(setLoading(true));
@@ -41,7 +41,7 @@ export const fetchUserDetail = (id) => async (dispatch) => {
   }
 }
 
-//méthode qui recupère les favories d'un utilisateur
+// méthode qui recupère les favories d'un utilisateur
 export const fetchUserFavorites = (userId) => async (dispatch) =>{
   try {
     dispatch(setLoading(true));
@@ -54,7 +54,7 @@ export const fetchUserFavorites = (userId) => async (dispatch) =>{
   }
 }
 
-//méthode qui récupère tous les avatars
+// méthode qui récupère tous les avatars
 export const fetchAvatars = () => async (dispatch) => {
   try {
     dispatch(setLoading(true));

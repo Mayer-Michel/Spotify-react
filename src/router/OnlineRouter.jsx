@@ -11,6 +11,9 @@ import Wishlist from "../screens/OnlineScreens/Wishlist";
 import Account from "../screens/OnlineScreens/Account/Index";
 import Home from "../screens/OnlineScreens/Home";
 import ArtistDetail from "../screens/OnlineScreens/ArtistDetail";
+import EditInfo from "../screens/OnlineScreens/Account/EditInfo";
+import AvatarList from "../screens/OnlineScreens/Account/AvatarList";
+import ManageSubscription from "../screens/OnlineScreens/Account/ManageSubscription";
 
 const OnlineRouter = createBrowserRouter([
     {
@@ -53,6 +56,18 @@ const OnlineRouter = createBrowserRouter([
                 path: "/artist-detail/:id",
                 element: <ArtistDetail />
             },
+            {
+                path: "/edit-info",
+                element: <EditInfo />
+            },
+            {
+                path: "/edit-avatar",
+                element: <AvatarList />
+            },
+            {
+                path: "/manage-subscription/:id",
+                element: <ManageSubscription />
+            }
         ]
     }
 ]);
