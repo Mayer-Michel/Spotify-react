@@ -15,9 +15,7 @@ const playerSlice = createSlice({
     initialState,
     reducers: {
         // Mettre a jour les states tout ce qu'on stock lorsqu'on active un chanson
-        setActiveSong: (state, action) => {
-            console.log("action", action.payload);
-            
+        setActiveSong: (state, action) => {            
             // Stockage de la chanson en lecture dans activeSong
             state.activeSong = action.payload?.songs[action.payload.index];
             // Stockage du tableau de chanson de l'album en cours de lecture
@@ -39,6 +37,10 @@ const playerSlice = createSlice({
             state.activeSong = state.currentSongs[action.payload];
             // On stock l'index de la chanson suivante
             state.currentIndex = action.payload;
+            // on va regarder si dans state.currentSongs[index donné] on a la clé album, si oui on met a jour currentAlbum si non on fait rien 
+            state.currentAlbum = state.currentSongs[action.payload]?.album
+            ? state.currentSongs[action.payload]?.album
+            : state.currentAlbum;
             state.isActive = true;
         },
 
@@ -48,6 +50,10 @@ const playerSlice = createSlice({
             state.activeSong = state.currentSongs[action.payload];
             // On stock l'index de la chanson suivante
             state.currentIndex = action.payload;
+             // on va regarder si dans state.currentSongs[index donné] on a la clé album, si oui on met a jour currentAlbum si non on fait rien 
+             state.currentAlbum = state.currentSongs[action.payload]?.album
+             ? state.currentSongs[action.payload]?.album
+             : state.currentAlbum;
             state.isActive = true;
         },
 
