@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { ALBUM_URL, ARTIST_URL } from '../../constants/apiConstant';
 import PageLoader from '../Loader/PageLoader';
 import { Link } from 'react-router-dom';
+import { totalDuration } from '../../services/toolsService';
 
 const HeaderInfo = ({ dataAlbum }) => {
 
@@ -32,24 +33,24 @@ const HeaderInfo = ({ dataAlbum }) => {
     )
 
     // Traitement de la durée total de l'album
-    const durationAlbum = () => {
-        // on va calculer le nombre de seconde pour tous les titres
-        const totalSeconds = dataAlbum?.songs && dataAlbum?.songs.map(function (titre) {
-            return parseInt(titre.duration);
-        }).reduce(function (a, b) {
-            return a + b;
-        }, 0);
+    // const durationAlbum = () => {
+    //     // on va calculer le nombre de seconde pour tous les titres
+    //     const totalSeconds = dataAlbum?.songs && dataAlbum?.songs.map(function (titre) {
+    //         return parseInt(titre.duration);
+    //     }).reduce(function (a, b) {
+    //         return a + b;
+    //     }, 0);
 
-        // on va formater les secondess en heure, minutes, secondes
-        const hours = Math.floor(totalSeconds / 3600);
-        const minutes = Math.floor((totalSeconds % 3600) / 60);
-        const seconds = totalSeconds % 60;
+    //     // on va formater les secondess en heure, minutes, secondes
+    //     const hours = Math.floor(totalSeconds / 3600);
+    //     const minutes = Math.floor((totalSeconds % 3600) / 60);
+    //     const seconds = totalSeconds % 60;
 
-        // on retourne une string formaté sous la forme 1h 15min 30s
-        return hours > 0
-            ? `${hours}h ${minutes}min ${seconds}s`
-            : `${minutes}min ${seconds}s`
-    }
+    //     // on retourne une string formaté sous la forme 1h 15min 30s
+    //     return hours > 0
+    //         ? `${hours}h ${minutes}min ${seconds}s`
+    //         : `${minutes}min ${seconds}s`
+    // }
 
     return (
         isLoading ? <PageLoader /> :
@@ -63,7 +64,7 @@ const HeaderInfo = ({ dataAlbum }) => {
                 <Dot />
                 <p className='font-bold text-base p-1'>{nbTitle}</p>
                 <Dot />
-                <p className='font-bold text-base p-1'>{dataAlbum?.songs?.length > 0 ? durationAlbum() : 'Pas de titre'}</p>
+                <p className='font-bold text-base p-1'>{dataAlbum?.songs?.length > 0 ? totalDuration(dataAlbum) : 'Pas de titre'}</p>
             </div>
     )
 }

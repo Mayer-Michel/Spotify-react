@@ -1,5 +1,4 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
 import HeaderDetail from './HeaderDetail';
 import ToolBarDetail from './ToolBarDetail';
 import ListAlbumSong from './ListAlbumSong';
