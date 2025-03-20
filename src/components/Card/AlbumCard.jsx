@@ -25,6 +25,7 @@ const AlbumCard = ({ data, index, songs, isPlaying, activeSong, artist= 'inconnu
 
   // Méthode lorqu'on met play
   const handlePlayClick = (index) => {
+    console.log('AAAAA', songs, data, index)
     dispatch(setActiveSong({songs, data, index}));
     dispatch(setActiveAlbum({data}));
     dispatch(playPause(true));

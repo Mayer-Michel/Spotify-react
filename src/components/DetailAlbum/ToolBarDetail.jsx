@@ -73,8 +73,9 @@ const ToolbarDetail = ({ dataAlbum }) => {
 
     // Méthode lorsqu'on met play
     const handlePlayClick = (index) => {
+        console.log('CCCC', songs, data, index)
         dispatch(setActiveSong({ songs, data, index }));
-        dispatch(setActiveAlbum(data));
+        dispatch(setActiveAlbum({data}));
         dispatch(playPause(true));
     }
 

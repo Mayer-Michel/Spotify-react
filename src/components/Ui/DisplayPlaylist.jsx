@@ -8,8 +8,7 @@ const DisplayPlaylist = ({ userPlaylists, songId, callable }) => {
     const [error, setError] = useState('');
     
     const handlePlaylistSong = async (playlistId, songId, arraySongs) => {
-    console.log('song', songId);
-    console.log('Playlists', playlistId);
+    
     // on reconstruit un tableau pour les songs
     try {
         setIsLoading(true);

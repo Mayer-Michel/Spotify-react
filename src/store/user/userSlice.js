@@ -10,6 +10,7 @@ const userSlice = createSlice({
     userFavorites: [],
     avatars: [],
     userPlaylists: [],
+    playlistDetail: {},
   },
   reducers: {
     setLoading: (state, action) => {
@@ -26,11 +27,14 @@ const userSlice = createSlice({
     },
     setUserPlaylists: (state, action) => {
       state.userPlaylists = action.payload['hydra:member'];
+    },
+    setPlaylistDetail: (state, action) => {
+      state.playlistDetail = action.payload
     }
   }
 })
 
-export const { setLoading, setUserDetail, setUserFavorites, setAvatars, setUserPlaylists } = userSlice.actions;
+export const { setLoading, setUserDetail, setUserFavorites, setAvatars, setUserPlaylists, setPlaylistDetail } = userSlice.actions;
 
 // méthode qui récupère les info d'un user
 export const fetchUserDetail = (id) => async (dispatch) => {
@@ -83,5 +87,19 @@ export const fetchUserPlaylists = (userId) => async (dispatch) => {
     dispatch(setLoading(false));
   }
 }
+
+// méthode qui récupère le detail d'une playlist
+export const fetchPlaylistDetail = (id) => async (dispatch) => {
+  try {
+    dispatch(setLoading(true));
+    const response = await axios.get(`${API_URL}/playlists/${id}`);
+    dispatch(setPlaylistDetail(response.data));
+  } catch (error) {
+    console.log(`Erreur lors du fetchPlaylistDetail : ${error}`);
+  } finally {
+    dispatch(setLoading(false));
+  }
+}
+
 
 export default userSlice.reducer;

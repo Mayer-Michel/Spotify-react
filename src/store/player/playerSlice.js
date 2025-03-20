@@ -16,10 +16,12 @@ const playerSlice = createSlice({
     reducers: {
         // Mettre a jour les states tout ce qu'on stock lorsqu'on active un chanson
         setActiveSong: (state, action) => {
+            console.log("action", action.payload);
+            
             // Stockage de la chanson en lecture dans activeSong
             state.activeSong = action.payload?.songs[action.payload.index];
             // Stockage du tableau de chanson de l'album en cours de lecture
-            state.currentSongs = action.payload?.data?.songs;
+            state.currentSongs = action.payload?.songs;
             // Stockage de l'index de la chanson en cours de lecture
             state.currentIndex = action.payload?.index;
             // Stockage de l'état du player
