@@ -12,7 +12,7 @@ const Detail = () => {
   // On récupère l'id de l'album passé dans l'url
   const {id} = params;
 
-  
+
   // On récupère le hook useDispatch pour dispatcher les actions
   const dispatch = useDispatch();
 
