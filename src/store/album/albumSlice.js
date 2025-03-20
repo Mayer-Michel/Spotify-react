@@ -30,11 +30,14 @@ const albumSlice = createSlice({
     },
     setSearchArtist: (state, action) => {
       state.searchArtist = action.payload
+    },
+    setAlbumGenre: (state, action) => {
+      state.albumByGenre = action.payload
     }
   }
 })
 
-export const { setLoading, setAlbums, setAlbumDetail, setSearchAlbum, setSearchTitle, setSearchArtist } = albumSlice.actions;
+export const { setLoading, setAlbums, setAlbumDetail, setSearchAlbum, setSearchTitle, setSearchArtist, setAlbumGenre } = albumSlice.actions;
 
 //méthode qui recupère tous les albums en bdd
 export const fetchAlbums = () => async (dispatch) => {
@@ -86,6 +89,37 @@ export const fetchResetSearch = () => async (dispatch) => {
   dispatch(setSearchAlbum([]));
   dispatch(setSearchTitle([]));
   dispatch(setSearchArtist([]));
+}
+
+// méthode qui récupère les albums par genre
+export const fetchAlbumByGenre = (genreArray) => async (dispatch) => {
+  try {
+    dispatch(setLoading(true));
+    // 1: on va boucler sur nitre tableau de genre
+    let result = [];
+    // 2: on va faire un requête pour chaque genre
+    genreArray && genreArray.map(async (genre) => {
+      const label = genre.label;
+      const response = await axios.get(`${API_URL}/albums?page=1&genre.label=${label}&isActive=true`);
+      // 3: on va concaténer les résultat
+      result = result.concat(response.data['hydra:member']);
+      // 3 bis: on enleve les doublouns avec un filter
+      result = result.filter((album, index, self) => 
+      index === self.findIndex((t) => (
+        t.id === album.id && t.title === album.title
+      ))
+      )
+      // 3 ter: on limite le tableau à 5 avec un random de 5 resultats
+      result = result.sort(()=> Math.random() - Math.random()).slice(0, 5);
+      
+      // 4: on set le resultat du nouveau tableau
+      dispatch(setAlbumGenre(result));
+    })
+  } catch (error) {
+    console.log(`erreur lors du fetchAlbumByGenre: ${error}`);
+  }finally{
+    dispatch(setLoading(false));
+  }
 }
 
 

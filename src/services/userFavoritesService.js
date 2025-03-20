@@ -12,7 +12,6 @@ export const fetchAddRemoveFavorites = async (arrayIds, userId) => {
         axios.defaults.headers.patch["Content-Type"] = "application/merge-patch+json";
         const response = await axios.patch(`${API_URL}/users/${userId}`, dataFavorite);
         if(response.status === 200){
-            console.log('response', response);
         }else{
             console.log('erreur')
         }

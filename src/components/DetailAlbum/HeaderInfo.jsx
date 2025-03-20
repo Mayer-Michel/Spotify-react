@@ -17,7 +17,7 @@ const HeaderInfo = ({ dataAlbum }) => {
         : `${ALBUM_URL}/${dataAlbum?.imagePath}`; // sinon je prends l'image d'album
 
     // On format la date de sortie (on ne récupère l'année)
-    const releaseDate = new Date(dataAlbum?.releaseDate).getFullYear() ?? 'Date inconnue';
+    const releaseDate = new Date(dataAlbum?.releaseDate).getFullYear().toString() ?? 'Date inconnue';
 
     // On définit le nombre de tittre par album
     const nbTitle = dataAlbum?.songs
@@ -38,7 +38,7 @@ const HeaderInfo = ({ dataAlbum }) => {
             return parseInt(titre.duration);
         }).reduce(function (a, b) {
             return a + b;
-        });
+        }, 0);
 
         // on va formater les secondess en heure, minutes, secondes
         const hours = Math.floor(totalSeconds / 3600);

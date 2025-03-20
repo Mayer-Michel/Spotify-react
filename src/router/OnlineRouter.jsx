@@ -37,7 +37,7 @@ const OnlineRouter = createBrowserRouter([
                 element: <Library />
             },
             {
-                path: "/add-playlist",
+                path: "/playlist",
                 element: <Playlist />
             },
             {

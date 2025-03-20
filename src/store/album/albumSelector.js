@@ -6,16 +6,18 @@ const selectAlbumDetail = (state) => state.albums.albumDetail;
 const selectSearchAlbum = (state) => state.albums.searchAlbum;
 const selectSearchTitle = (state) => state.albums.searchTitle;
 const selectSearchArtist = (state) => state.albums.searchArtist;
+const selectAlbumByGenre = (state) => state.albums.albumByGenre;
 
 const selectAlbumData = createSelector(
-  [selectLoading, selectAlbums, selectAlbumDetail, selectSearchAlbum, selectSearchTitle, selectSearchArtist], 
-  (loading, albums, albumDetail, searchAlbum, searchTitle, searchArtist) => ({
+  [selectLoading, selectAlbums, selectAlbumDetail, selectSearchAlbum, selectSearchTitle, selectSearchArtist, selectAlbumByGenre], 
+  (loading, albums, albumDetail, searchAlbum, searchTitle, searchArtist, albumByGenre) => ({
     loading, 
     albums,
     albumDetail,
     searchAlbum,
     searchTitle,
-    searchArtist
+    searchArtist,
+    albumByGenre
   }));
 
 export default selectAlbumData;

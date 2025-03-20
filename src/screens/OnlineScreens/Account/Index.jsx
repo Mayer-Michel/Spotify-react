@@ -9,30 +9,30 @@ import { BsFillPencilFill } from 'react-icons/bs';
 import InfoAccount from '../../../components/Ui/InfoAccount';
 
 const Account = () => {
-  // on récupère le hook useParam pour récupèrer les paramètres de l'url
+  //on recupere le hook useParams pour récupérer les paramètres de l'url
   const params = useParams();
   const userId = params.id;
 
-  // On déclare un state pour l'abonnement
+  //on declare un state pour l'abonnement
   const [subscriptions, setSubscriptions] = useState([]);
+ 
 
-
-  // on récupère le hook useDispatch
+  //on récupère le hook useDispatch
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchUserDetail(userId));
-  }, [dispatch, userId]);
+  }, [dispatch, userId])
 
   const { userDetail, loading } = useSelector(selectUserData);
+
   useEffect(() => {
     if (userDetail && userDetail?.userSubscriptions) {
-      setSubscriptions(userDetail?.userSubscriptions);
+      setSubscriptions(userDetail.userSubscriptions);
     }
-  }, [userDetail]);
+  }, [userDetail])
 
-  console.log(userDetail);
-  // on déclare des constantes pour les indos de l'utilisateur
+  //on déclare des constantes pour les infos de l'utilisateur
   const imgUser = userDetail?.avatar?.imagePath
     ? `${AVATAR_URL}/${userDetail?.avatar?.imagePath}`
     : `${IMAGE_URL}/user.png`;
@@ -53,20 +53,23 @@ const Account = () => {
           </div>
         </div>
         <div className='w-full max-w-md mt-10 bg-white p-6 rounded-lg shadow-lg'>
-          <InfoAccount label={"pseudo: "} value={nickname} />
+          <InfoAccount label={"Pseudo: "} value={nickname} />
           <InfoAccount label={"Email: "} value={email} />
-          <InfoAccount label={"Mot de passe: "} value={"*********"} />
-          <div className='flex flex-col itmes-start mb-4'>
-            <Link to={'/edit-info'} className='mt-4 bg-green text-center text-white px-4 py-2 rounded-lg hover:bg-green_top transition duration-300'>
+          <InfoAccount label={"Mot de passe: "} value={"********"} />
+          <div className='flex flex-col w-full items-start mb-4'>
+            <Link to={'/edit-info'} className='w-full text-center mt-4 bg-green text-white px-4 py-2 rounded-lg hover:bg-green_top transition duration-300'>
               Modifier les informations
             </Link>
-            <Link to={`/manage-subscription/${userId}`} className='mt-4 text-center bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300'>
+            <Link
+              to={`/manage-subscription/${userId}`}
+              state={{ subscriptions: subscriptions }}
+              className='w-full text-center mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300'
+            >
               Gérer mon abonnement
             </Link>
           </div>
         </div>
       </div>
-
   )
 }
 

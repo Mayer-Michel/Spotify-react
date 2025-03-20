@@ -5,6 +5,7 @@ import { BiTime } from 'react-icons/bi';
 import { tableIcon } from '../../constants/appConstant';
 import PlayPause from '../Services/PlayPause';
 import { IoMdAdd } from 'react-icons/io';
+import PopupPlaylist from '../Ui/PopupPlaylist';
 
 const ListAlbumSong = ({ dataAlbum }) => {
     // on redeclare nos constantes
@@ -12,6 +13,8 @@ const ListAlbumSong = ({ dataAlbum }) => {
     const songs = dataAlbum?.songs;
     // on declare nos states
     const [isHover, setIsHover] = useState(-1); // quand la souris sera sur une piste
+    const [isVisible, setIsVisible] = useState(false); // pour gérer l'affichage de ma popup pour la playlist
+    const [songId, setSongId] = useState(null);
     
     // on récupère les données du store
     const { isPlaying, activeSong } = useSelector((state) => state.player);
@@ -32,8 +35,9 @@ const ListAlbumSong = ({ dataAlbum }) => {
     }
 
     // Méthode pour mettre une piste dans la playlist
-    const addPlaylist = () => {
-        console.log('add playlist')
+    const addPlaylist = (id) => {
+        setSongId(id);
+        setIsVisible(true);
     }
 
     return (
@@ -89,7 +93,7 @@ const ListAlbumSong = ({ dataAlbum }) => {
                                             <td className='white-space-nowrap px-6 py-4 font-medium m-1'>
                                                 <div className='flex justify-end'>
                                                     {isHover !== index && <div style={tableIcon}></div>}
-                                                    {isHover === index && <IoMdAdd className='cursor-pointer' style={tableIcon} onClick={() => addPlaylist()} />}
+                                                    {isHover === index && <IoMdAdd className='cursor-pointer' style={tableIcon} onClick={() => addPlaylist(row.id)} />}
                                                 </div>
                                             </td>
                                             <td className='white-space-nowrap px-6 py-4 font-medium m-1'>{duration}</td>
@@ -101,6 +105,11 @@ const ListAlbumSong = ({ dataAlbum }) => {
                     </div>
                 </div>
             </div>
+            {isVisible && 
+            <PopupPlaylist 
+            callable={() => setIsVisible(false)}
+            songId={songId}
+            />}
         </div>
     )
 }
